@@ -27,6 +27,8 @@ class NewsUpdate extends JPanel {
 			int[] modules) {
 		contentPane = panel;
 		setLayout(null);
+		setOpaque(true);
+		setBackground(Color.GREEN.darker().darker());
 		// construct components
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
@@ -41,23 +43,13 @@ class NewsUpdate extends JPanel {
 				super.paintComponent(graphics);
 			}
 		};
-		creditLabel = new JLabel("+ 100 Credits");
-		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
-		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		creditLabel.setBounds(460, 300, 1000, 100);
-
-		happinessLabel = new JLabel("+ 10 Hapiness");
-		happinessLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
-		happinessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		happinessLabel.setBounds(460, 400, 1000, 100);
-
 		JScrollPane temp = new JScrollPane(text);
 		temp.setBounds(0, 0, 1920, 1080);
 
-		titleLabel = new JLabel("Year " + currentYear);
+		titleLabel = new JLabel("News Screen");
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(560, 200, 800, 100);
+		titleLabel.setBounds(460, 200, 1000, 100);
 
 		// construct components
 		nextButton = new JButton("Next");
@@ -73,8 +65,6 @@ class NewsUpdate extends JPanel {
 			cardLayout.next(contentPane);
 		});
 
-		add(creditLabel);
-		add(happinessLabel);
 		add(titleLabel);
 		add(nextButton);
 		add(temp);
