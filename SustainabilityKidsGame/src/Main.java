@@ -4,6 +4,28 @@ import javax.swing.*;
 
 public class Main
 {
+	public int happinessValue = 0;
+	public int credits = 100;
+	public final String[] scenarios = new String[10];
+	public final int[] modules = new int[10];
+	
+	/*
+	 * Index: 	Module:
+	 * 0		
+	 * 1
+	 * 2
+	 * 3
+	 * 4
+	 * 5
+	 * 6
+	 * 7
+	 * 8
+	 * 9
+	 * 
+	 */
+	
+	public int currentYear = 0;
+	
     private JPanel contentPane;
     private homeScreen homeScreen;
     private Demo1 demo1;
