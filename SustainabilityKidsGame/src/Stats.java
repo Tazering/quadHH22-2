@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 class Stats extends JPanel {
@@ -24,16 +23,17 @@ class Stats extends JPanel {
 	private JLabel happinessLabel;
 	private JButton nextButton;
 	private JLabel blackBox;
+	private int currentYear;
 
-	public Stats(JPanel panel, int currentYear, int credits, int happinessValue) {
+	public Stats(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
 		setBackground(Color.GREEN.darker().darker());
 		// construct components
-
+		this.currentYear = currentYear;
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
-		JTextArea text = new JTextArea() {
+		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
 				setOpaque(false);
@@ -77,10 +77,16 @@ class Stats extends JPanel {
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 
 			if (currentYear >= 3) {
+				WinScreen winScreen = new WinScreen(contentPane, currentYear, credits, happinessValue, scenarios,
+						modules);
+				contentPane.add(winScreen);
+				cardLayout.next(contentPane);
+			} else {
+				NewsUpdate newsUpdate = new NewsUpdate(contentPane, currentYear + 1, credits, happinessValue, scenarios,
+						modules);
+				contentPane.add(newsUpdate);
 				cardLayout.next(contentPane);
 			}
-			cardLayout.next(contentPane);
-
 		});
 
 		add(happinessLabel);

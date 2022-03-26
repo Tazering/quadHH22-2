@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 class GameScreen extends JPanel {
@@ -22,7 +21,8 @@ class GameScreen extends JPanel {
 	private JLabel titleLabel;
 	private JButton nextButton;
 
-	public GameScreen(JPanel panel, int credits, int happinessValue) {
+	public GameScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
+			int[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -30,7 +30,7 @@ class GameScreen extends JPanel {
 		// construct components
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
-		JTextArea text = new JTextArea() {
+		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
 				setOpaque(false);
@@ -47,7 +47,7 @@ class GameScreen extends JPanel {
 		titleLabel = new JLabel("This is the game screen");
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(560, 200, 800, 100);
+		titleLabel.setBounds(460, 200, 1000, 100);
 
 		// construct components
 		nextButton = new JButton("Next");
@@ -58,6 +58,8 @@ class GameScreen extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			Stats yearlyStats = new Stats(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			contentPane.add(yearlyStats);
 			cardLayout.next(contentPane);
 		});
 

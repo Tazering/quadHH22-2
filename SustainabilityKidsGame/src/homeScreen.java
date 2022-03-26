@@ -1,5 +1,6 @@
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 class homeScreen extends JPanel {
@@ -20,15 +20,16 @@ class homeScreen extends JPanel {
 	private JLabel titleLabel;
 	private JLabel blackBox;
 
-	public homeScreen(JPanel panel) {
+	public homeScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
+			int[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
 		setBackground(Color.GREEN.darker().darker());
-		// construct components
+		setPreferredSize(new Dimension(1920, 1080));
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
-		JTextArea text = new JTextArea() {
+		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
 				setOpaque(false);
@@ -57,11 +58,12 @@ class homeScreen extends JPanel {
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));
+
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			cardLayout.next(contentPane);
-			cardLayout.next(contentPane);
+			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			contentPane.add(year);
 			cardLayout.next(contentPane);
 		});
 
@@ -73,6 +75,8 @@ class homeScreen extends JPanel {
 		demoButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			Demo1 demo1 = new Demo1(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			contentPane.add(demo1);
 			cardLayout.next(contentPane);
 
 		});

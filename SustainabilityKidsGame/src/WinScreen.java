@@ -13,19 +13,22 @@ class WinScreen extends JPanel {
 	private JButton jcomp1;
 	private JPanel contentPane;
 
-	public WinScreen(JPanel panel) {
+	public WinScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
+			int[] modules) {
 		contentPane = panel;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		setOpaque(true);
 		setBackground(Color.GREEN.darker().darker());
-		setPreferredSize(new Dimension(1920, 1080));
 
 		// construct components
 		jcomp1 = new JButton("win");
 		jcomp1.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			Resource resourceScreen = new Resource(contentPane, currentYear, credits, happinessValue, scenarios,
+					modules);
+			contentPane.add(resourceScreen);
 			cardLayout.next(contentPane);
 		});
 

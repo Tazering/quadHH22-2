@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 class Year extends JPanel {
@@ -21,16 +20,16 @@ class Year extends JPanel {
 	private JPanel contentPane;
 	private JLabel titleLabel;
 	private JButton nextButton;
+	private JLabel creditLabel;
+	private JLabel happinessLabel;
 
-	public Year(JPanel panel, int currentYear) {
+	public Year(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
 		contentPane = panel;
 		setLayout(null);
-		setOpaque(true);
-		setBackground(Color.GREEN.darker().darker());
 		// construct components
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
-		JTextArea text = new JTextArea() {
+		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
 				setOpaque(false);
@@ -41,10 +40,20 @@ class Year extends JPanel {
 				super.paintComponent(graphics);
 			}
 		};
+		creditLabel = new JLabel("+ 100 Credits");
+		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
+		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		creditLabel.setBounds(460, 300, 1000, 100);
+
+		happinessLabel = new JLabel("+ 10 Hapiness");
+		happinessLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
+		happinessLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		happinessLabel.setBounds(460, 400, 1000, 100);
+
 		JScrollPane temp = new JScrollPane(text);
 		temp.setBounds(0, 0, 1920, 1080);
 
-		titleLabel = new JLabel("Year " + Main.currentYear);
+		titleLabel = new JLabel("Year " + currentYear);
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setBounds(560, 200, 800, 100);
@@ -58,11 +67,14 @@ class Year extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			GameScreen gameScreen = new GameScreen(contentPane, currentYear, credits, happinessValue, scenarios,
+					modules);
+			contentPane.add(gameScreen);
 			cardLayout.next(contentPane);
-			Main main = new Main();
-			main.setYear(5);
 		});
 
+		add(creditLabel);
+		add(happinessLabel);
 		add(titleLabel);
 		add(nextButton);
 		add(temp);

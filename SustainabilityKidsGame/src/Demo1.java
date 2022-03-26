@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 class Demo1 extends JPanel {
@@ -22,7 +21,7 @@ class Demo1 extends JPanel {
 	private JLabel titleLabel;
 	private JButton nextButton;
 
-	public Demo1(JPanel panel) {
+	public Demo1(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -30,7 +29,7 @@ class Demo1 extends JPanel {
 		// construct components
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
-		JTextArea text = new JTextArea() {
+		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
 				setOpaque(false);
@@ -58,6 +57,8 @@ class Demo1 extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			Demo2 demo2 = new Demo2(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			contentPane.add(demo2);
 			cardLayout.next(contentPane);
 		});
 
