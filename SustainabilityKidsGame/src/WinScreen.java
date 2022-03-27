@@ -13,8 +13,8 @@ class WinScreen extends JPanel {
 	private JButton jcomp1;
 	private JPanel contentPane;
 
-	public WinScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			boolean[] modules) {
+	public WinScreen(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios,
+			int scenario) {
 		contentPane = panel;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -27,7 +27,7 @@ class WinScreen extends JPanel {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 			Resource resourceScreen = new Resource(contentPane, currentYear, credits, happinessValue, scenarios,
-					modules);
+					scenario);
 			contentPane.add(resourceScreen);
 			cardLayout.next(contentPane);
 		});

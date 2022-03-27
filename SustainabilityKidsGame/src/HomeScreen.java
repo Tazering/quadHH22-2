@@ -13,15 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-class homeScreen extends JPanel {
+class HomeScreen extends JPanel {
 	private JButton nextButton;
 	private JButton demoButton;
 	private JPanel contentPane;
 	private JLabel titleLabel;
 	private JLabel blackBox;
+	static Year year;
 
-	public homeScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			boolean[] modules) {
+	public HomeScreen(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios, int scenario) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -62,7 +62,7 @@ class homeScreen extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
 			contentPane.add(year);
 			cardLayout.next(contentPane);
 		});
@@ -75,7 +75,7 @@ class homeScreen extends JPanel {
 		demoButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			Demo1 demo1 = new Demo1(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			Demo1 demo1 = new Demo1(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
 			contentPane.add(demo1);
 			cardLayout.next(contentPane);
 
@@ -86,5 +86,10 @@ class homeScreen extends JPanel {
 		add(titleLabel);
 		add(blackBox);
 		add(temp);
+	}
+	
+	public static Year getYearScreen()
+	{
+		return year;
 	}
 }

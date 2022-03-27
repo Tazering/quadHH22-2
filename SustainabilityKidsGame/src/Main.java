@@ -8,9 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Main {
-	public int happinessValue = 10;
+	public static int happinessValue = 10;
 	public static int credits = 0;
-	public static final String[] scenarios = {
+	
+	public static Scenario[] scenarios = new Scenario[15];
+	private int scenario = -1;	
+	public static final String[] scenarioText = {
 			"The world’s countries have recognized your efforts, and have given you an extra 30 credits.",
 			"Woah! Scientists have discovered a new tree species that grows incredibly fast!\nYou can now plant twice as many trees.",
 			"Engineers have found a way to make solar panels cheaper! The cost of creating\nsolar panels is now only 30 credits.",
@@ -26,8 +29,8 @@ public class Main {
 			"Uh oh! There is a shortage of recycling bins, so you can no longer recycle.",
 			"Uh oh! There is a shortage of composting bins, so you can no longer compost.",
 			"Oh no! A new lumber company has cut down thousands of trees. Your Earth’s\nhappiness has dropped by 20!" };
-	public final boolean[] modules = new boolean[15];
-
+	
+	public static Function[] functions = new Function[10];
 	/*
 	 * Index: Module: 0 1 2 3 4 5 6 7 8 9
 	 * 
@@ -35,10 +38,39 @@ public class Main {
 
 	public int currentYear = 1;
 
-	private homeScreen homeScreen;
+	public static HomeScreen homeScreen;
 
 	private Dimension screenSize;
-
+	private void init()
+	{
+		initializeScenarios();
+		initializeFunctions();
+		displayGUI();
+	}
+	
+	private void initializeScenarios() 
+	{
+		for (int i = 0; i < scenarioText.length; i++)
+		{
+			scenarios[i] = new Scenario(scenarioText[i], i);
+		}
+	}
+	
+	private void initializeFunctions()
+	{
+		//private enum FunctionTypes{TREE,VEGGIE,OCEAN,ENERGY,RECYCLE,COMPOST,CARPOOL,SOLAR,PARK,TURBINE};
+		functions[0] = new Function(FunctionTypes.TREE, "Plant Trees", 20, 6, 5, 0, true);
+		functions[1] = new Function(FunctionTypes.VEGGIES, "Eat More Veggies", 5, 1, 5, 0, true);
+		functions[2] = new Function(FunctionTypes.OCEAN, "Ocean Clean Up", 10, 1, 5, 0, true);
+		functions[3] = new Function(FunctionTypes.ENERGY, "Save Energy", 25, 10, 3, 0, true);
+		functions[4] = new Function(FunctionTypes.RECYCLE, "Recycle", 5, 1, 3, 0, true);
+		functions[5] = new Function(FunctionTypes.COMPOST, "Compost", 10, 2, 3, 0, true);
+		functions[6] = new Function(FunctionTypes.CARPOOL, "Carpool", 10, 2, 3, 0, true);
+		functions[7] = new Function(FunctionTypes.SOLAR, "Solar Panels", 50, 20, 3, 0, true);
+		functions[8] = new Function(FunctionTypes.PARK, "National Parks", 20, 10, 0, 0, false);
+		functions[9] = new Function(FunctionTypes.TURBINE, "Wind Turbines", 50, 20, 0, 0, false);
+	}
+	
 	private void displayGUI() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -51,7 +83,7 @@ public class Main {
 		contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new CardLayout());
 
-		homeScreen = new homeScreen(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+		homeScreen = new HomeScreen(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
 		// loseScreen = new LoseScreen(contentPane, currentYear, credits,
 		// happinessValue, scenarios, modules);
 		// resourceScreen = new Resource(contentPane, currentYear, credits,
@@ -68,9 +100,19 @@ public class Main {
 	public static void main(String... args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new Main().displayGUI();
+				new Main().init();
 			}
 		});
+	}
+	
+	public static void setHappiness(int newHappiness)
+	{
+		happinessValue = newHappiness;
+	}
+	
+	public static HomeScreen getHomeScreen()
+	{
+		return homeScreen;
 	}
 
 }

@@ -13,19 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-class Year extends JPanel {
+public class Year extends JPanel {
 	private Dimension screenSize;
 
 	private JButton jcomp1;
 	private JPanel contentPane;
 	private JLabel titleLabel;
 	private JButton nextButton;
-	private JLabel creditLabel;
-	private JLabel happinessLabel;
+	public JLabel creditLabel = new JLabel("");
+	public JLabel happinessLabel = new JLabel("");
 	private JLabel scenarioLabel;
 	private int tempCredits, tempHappiness;
 
-	public Year(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
+	public Year(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios, int scenario) {
 		tempCredits = credits + 100;
 		tempHappiness = happinessValue;
 		contentPane = panel;
@@ -47,44 +47,42 @@ class Year extends JPanel {
 		happinessLabel = new JLabel("+ 0 Happiness");
 		creditLabel = new JLabel("+ 100 Credits");
 
-		if (modules[5]) {
-			tempHappiness -= 25;
-			happinessLabel = new JLabel("-25 Happiness");
+		if (scenario != -1)
+		{
+			scenarios[scenario].affectPlayer();
 		}
-
-		if (modules[10]) {
-			tempHappiness -= 20;
-			happinessLabel = new JLabel("-20 Happiness");
+		
+		switch (scenario) {
+			case 0:
+				tempCredits += 30;
+				happinessLabel.setText("+130 Credits");
+				break;
+			case 5:
+			case 6:
+				tempHappiness -= 25;
+				happinessLabel.setText("-25 Happiness");
+				break;
+			case 8:
+				tempHappiness -= 30;
+				happinessLabel.setText("-30 Happiness");
+				break;
+			case 9:
+				tempCredits -= 50;
+				creditLabel.setText("+50 Credits");
+				break;
+			case 10:
+			case 11:
+				tempHappiness -= 20;
+				happinessLabel.setText("-20 Happiness");
+				break;
+			case 14:
+				tempHappiness -= 20;
+				happinessLabel.setText("-20 Happiness");
+				break;
+			case -1:
+				break;
 		}
-		if (modules[14]) {
-			tempHappiness -= 20;
-			happinessLabel = new JLabel("-20 Happiness");
-		}
-		if (modules[11]) {
-			tempHappiness -= 20;
-			happinessLabel = new JLabel("-20 Happiness");
-		}
-
-		if (modules[6]) {
-			tempHappiness -= 25;
-			happinessLabel = new JLabel("-25 Happiness");
-		}
-
-		if (modules[8]) {
-			tempHappiness -= 30;
-			happinessLabel = new JLabel("-30 Happiness");
-		}
-
-		if (modules[9]) {
-			creditLabel = new JLabel("+ 50 Credits");
-			tempCredits -= 50;
-		}
-
-		if (modules[0]) {
-			creditLabel = new JLabel("+ 130 Credits");
-			tempCredits += 30;
-		}
-
+		
 		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		creditLabel.setBounds(265, 150, 1000, 100);
@@ -110,8 +108,7 @@ class Year extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			GameScreen gameScreen = new GameScreen(contentPane, currentYear, tempCredits, tempHappiness, scenarios,
-					modules);
+			GameScreen gameScreen = new GameScreen(contentPane, currentYear, tempCredits, tempHappiness, scenarios, scenario);
 			contentPane.add(gameScreen);
 			cardLayout.next(contentPane);
 		});
@@ -122,5 +119,4 @@ class Year extends JPanel {
 		add(nextButton);
 		add(temp);
 	}
-
 }

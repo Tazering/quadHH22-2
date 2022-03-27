@@ -21,7 +21,7 @@ class Demo1 extends JPanel {
 	private JLabel titleLabel;
 	private JButton nextButton;
 
-	public Demo1(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
+	public Demo1(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios, int scenario) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -57,7 +57,7 @@ class Demo1 extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			Demo2 demo2 = new Demo2(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			Demo2 demo2 = new Demo2(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
 			contentPane.add(demo2);
 			cardLayout.next(contentPane);
 		});

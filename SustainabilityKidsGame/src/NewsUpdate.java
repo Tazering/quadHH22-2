@@ -25,31 +25,29 @@ class NewsUpdate extends JPanel {
 	private JLabel creditLabel;
 	private JLabel happinessLabel;
 	private JTextArea scenarioLabel;
+	private int scenario;
 
-	public NewsUpdate(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			boolean[] modules) {
+	public NewsUpdate(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios,
+			int scenario) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
 		setBackground(Color.GREEN.darker().darker());
 		// construct components
 
-		for (int x = 0; x < modules.length; x++)
-			modules[x] = false;
-
 		Random rand = new Random();
 
 		if (currentYear > 1) {
-			int randScenario = rand.nextInt(0, 15);
+			int randScenario = rand.nextInt(15);
 
-			scenarioLabel = new JTextArea(scenarios[randScenario]);
+			scenarioLabel = new JTextArea(scenarios[randScenario].getText());
 			scenarioLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 			scenarioLabel.setOpaque(false);
 			scenarioLabel.setEditable(false);
 			// scenarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			scenarioLabel.setBounds(265, 400, 1000, 100);
 			add(scenarioLabel);
-			modules[randScenario] = true;
+			this.scenario = randScenario;
 		}
 
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
@@ -81,7 +79,7 @@ class NewsUpdate extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, modules);
+			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, this.scenario);
 			contentPane.add(year);
 			cardLayout.next(contentPane);
 		});

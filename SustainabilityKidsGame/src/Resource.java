@@ -13,7 +13,7 @@ class Resource extends JPanel {
 	private JButton jcomp1;
 	private JPanel contentPane;
 
-	public Resource(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
+	public Resource(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios, int scenario) {
 		contentPane = panel;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
