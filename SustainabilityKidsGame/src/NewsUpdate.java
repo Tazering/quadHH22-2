@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 class NewsUpdate extends JPanel {
 	private Dimension screenSize;
@@ -45,12 +44,12 @@ class NewsUpdate extends JPanel {
 			scenarioLabel.setOpaque(false);
 			scenarioLabel.setEditable(false);
 			// scenarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			scenarioLabel.setBounds(265, 400, 1000, 100);
+			scenarioLabel.setBounds(850, 310, 1000, 100);
 			add(scenarioLabel);
 			this.scenario = randScenario;
 		}
 
-		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
+		final ImageIcon icon = new ImageIcon("newsPaper.png");
 		JLabel text = new JLabel() {
 			Image img = icon.getImage();
 			{
@@ -63,12 +62,7 @@ class NewsUpdate extends JPanel {
 			}
 		};
 		JScrollPane temp = new JScrollPane(text);
-		temp.setBounds(0, 0, 1920, 1080);
-
-		titleLabel = new JLabel("News Screen");
-		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(265, 50, 1000, 100);
+		temp.setBounds(0, 0, 2100, 1200);
 
 		// construct components
 		nextButton = new JButton("Next");
@@ -84,7 +78,6 @@ class NewsUpdate extends JPanel {
 			cardLayout.next(contentPane);
 		});
 
-		add(titleLabel);
 		add(nextButton);
 		add(temp);
 	}

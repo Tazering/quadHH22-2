@@ -14,21 +14,31 @@ public class Main {
 	public static Scenario[] scenarios = new Scenario[15];
 	private int scenario = -1;
 	public static final String[] scenarioText = {
-			"The world’s countries have recognized your efforts, and have given you an extra 30 credits.",
-			"Woah! Scientists have discovered a new tree species that grows incredibly fast!\nYou can now plant twice as many trees.",
-			"Engineers have found a way to make solar panels cheaper! The cost of creating\nsolar panels is now only 30 credits.",
-			"You are given permission by the world’s countries to create national parks.\nYou can create up to 3 parks for 20 credits each!",
-			"Engineers have created a new invention: the Wind Turbine. You can now build up\nto 4 wind turbines for 50 credits each!",
-			"Uh oh! A fire has broken out in the Northern Hemisphere. Your Earth’s happiness\nhas dropped by 25.",
-			"Uh oh! A fire has broken out in the Southern Hemisphere. Your Earth’s happiness\nhas dropped by 25.",
-			"Tree workers have gone on strike! It now costs 40 credits to plant trees.",
-			"An oil tanker crashes in the ocean, causing millions of gallons of oil to pollute\nthe Atlantic. Your Earth’s happiness has dropped by 30.",
-			"It has been a rough time for the world’s economy, and so you have been given \nonly 50 credits to spend.",
-			"Oh no! A new coal mine has been built. Your Earth’s happiness has dropped by 20.",
-			"Oh no! Less and less people have been carpooling to school because of a flu \noutbreak. Your Earth’s happiness has dropped by 20.",
-			"Uh oh! There is a shortage of recycling bins, so you can no longer recycle.",
-			"Uh oh! There is a shortage of composting bins, so you can no longer compost.",
-			"Oh no! A new lumber company has cut down thousands of trees. Your Earth’s\nhappiness has dropped by 20!" };
+			"The world’s countries have recognized your efforts,\n" + "and have given you an extra 30 credits.",
+			"Woah! Scientists have discovered a new tree species\n"
+					+ "that grows incredibly fast! You can now plant twice\n" + "as many trees.",
+			"Engineers have found a way to make solar panels\n" + "cheaper! The cost of creating solar panels is now\n"
+					+ "only 30 credits.",
+			"You are given permission by the world’s countries\n" + "to create national parks. You can create up to 3\n"
+					+ "parks for 20 credits each!",
+			"Engineers have created a new invention: the Wind\n" + "Turbine. You can now build up to 4 wind turbines\n+"
+					+ "for 50 credits each!",
+			"Uh oh! A fire has broken out in the Northern Hemi-\n"
+					+ "sphere. Your Earth’s happiness has dropped by 25.",
+			"Uh oh! A fire has broken out in the Southern Hemi-\n"
+					+ "sphere. Your Earth’s happiness has dropped by 25.",
+			"Tree workers have gone on strike! It now costs 40\n" + "credits to plant trees.",
+			"An oil tanker crashes in the ocean, causing millions\n"
+					+ "of gallons of oil to pollutethe Atlantic. Your\n" + "Earth’s happiness has dropped by 30.",
+			"It has been a rough time for the world’s economy,\n" + "and so you have been given only 50 credits to\n+"
+					+ "spend.",
+			"Oh no! A new coal mine has been built. Your Earth’s\n" + "happiness has dropped by 20.",
+			"Oh no! Less and less people have been carpooling\n" + "to school because of a flu outbreak. Your Earth’s\n"
+					+ "happiness has dropped by 20.",
+			"Uh oh! There is a shortage of recycling bins, so\n" + "you can no longer recycle.",
+			"Uh oh! There is a shortage of composting bins, so\n" + "you can no longer compost.",
+			"Oh no! A new lumber company has cut down\n" + "thousands of trees. Your Earth’s happiness has\n"
+					+ "dropped by 20!" };
 
 	public static Function[] functions = new Function[10];
 	/*

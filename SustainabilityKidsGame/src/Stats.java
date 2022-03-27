@@ -47,7 +47,7 @@ class Stats extends JPanel {
 		JScrollPane temp = new JScrollPane(text);
 		temp.setBounds(0, 0, 1920, 1080);
 
-		titleLabel = new JLabel("YOUR STATS FOR YEAR " + currentYear);
+		titleLabel = new JLabel("Yearly Review " + currentYear);
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setBounds(265, 50, 1000, 100);
@@ -88,7 +88,6 @@ class Stats extends JPanel {
 				cardLayout.next(contentPane);
 
 			} else {
-
 				NewsUpdate newsUpdate = new NewsUpdate(contentPane, currentYear + 1, credits, happinessValue, scenarios,
 						scenario);
 				contentPane.add(newsUpdate);

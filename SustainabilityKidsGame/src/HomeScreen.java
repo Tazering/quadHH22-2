@@ -54,7 +54,7 @@ class HomeScreen extends JPanel {
 		blackBox.setOpaque(true);
 		blackBox.setBounds(365, 150, 800, 800);
 
-		nextButton = new JButton("Next");
+		nextButton = new JButton("Play Game");
 		nextButton.setBounds(390, 400, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
@@ -63,7 +63,7 @@ class HomeScreen extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
+			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
 			contentPane.add(year);
 			cardLayout.next(contentPane);
 		});
