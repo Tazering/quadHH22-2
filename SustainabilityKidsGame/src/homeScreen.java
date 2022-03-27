@@ -21,7 +21,7 @@ class homeScreen extends JPanel {
 	private JLabel blackBox;
 
 	public homeScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			int[] modules) {
+			boolean[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -46,15 +46,15 @@ class homeScreen extends JPanel {
 		titleLabel = new JLabel("Climate Hero!!!");
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(560, 200, 800, 100);
+		titleLabel.setBounds(365, 50, 800, 100);
 
 		blackBox = new JLabel();
 		blackBox.setBackground(Color.GRAY);
 		blackBox.setOpaque(true);
-		blackBox.setBounds(560, 300, 800, 800);
+		blackBox.setBounds(365, 150, 800, 800);
 
 		nextButton = new JButton("Next");
-		nextButton.setBounds(585, 550, 750, 100);
+		nextButton.setBounds(390, 400, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));
@@ -68,7 +68,7 @@ class homeScreen extends JPanel {
 		});
 
 		demoButton = new JButton("Demo");
-		demoButton.setBounds(585, 675, 750, 100);
+		demoButton.setBounds(390, 525, 750, 100);
 		demoButton.setBackground(Color.BLUE);
 		demoButton.setForeground(Color.WHITE);
 		demoButton.setFont(new Font("Comic Sans", Font.BOLD, 30));

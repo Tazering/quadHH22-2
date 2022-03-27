@@ -21,7 +21,7 @@ class Demo2 extends JPanel {
 	private JLabel titleLabel;
 	private JButton nextButton;
 
-	public Demo2(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
+	public Demo2(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -46,11 +46,11 @@ class Demo2 extends JPanel {
 		titleLabel = new JLabel("This is Demo Page 2");
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(560, 200, 800, 100);
+		titleLabel.setBounds(365, 50, 800, 100);
 
 		// construct components
 		nextButton = new JButton("Next");
-		nextButton.setBounds(585, 900, 750, 100);
+		nextButton.setBounds(390, 700, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));

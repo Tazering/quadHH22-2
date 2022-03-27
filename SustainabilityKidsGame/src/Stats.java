@@ -25,7 +25,7 @@ class Stats extends JPanel {
 	private JLabel blackBox;
 	private int currentYear;
 
-	public Stats(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
+	public Stats(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -50,25 +50,25 @@ class Stats extends JPanel {
 		titleLabel = new JLabel("YOUR STATS FOR YEAR " + currentYear);
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(460, 200, 1000, 100);
+		titleLabel.setBounds(265, 50, 1000, 100);
 
 		creditLabel = new JLabel("Credits: " + credits);
 		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		creditLabel.setBounds(460, 300, 1000, 100);
+		creditLabel.setBounds(265, 150, 1000, 100);
 
 		happinessLabel = new JLabel("Happiness: " + happinessValue);
 		happinessLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		happinessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		happinessLabel.setBounds(460, 400, 1000, 100);
+		happinessLabel.setBounds(265, 250, 1000, 100);
 
 		blackBox = new JLabel();
 		blackBox.setBackground(Color.GRAY);
 		blackBox.setOpaque(true);
-		blackBox.setBounds(560, 300, 800, 800);
+		blackBox.setBounds(365, 150, 800, 800);
 
 		nextButton = new JButton("Next");
-		nextButton.setBounds(585, 950, 750, 100);
+		nextButton.setBounds(390, 700, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));

@@ -14,7 +14,7 @@ class LoseScreen extends JPanel {
 	private JPanel contentPane;
 
 	public LoseScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			int[] modules) {
+			boolean[] modules) {
 		contentPane = panel;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 

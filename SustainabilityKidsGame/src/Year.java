@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,12 +23,14 @@ class Year extends JPanel {
 	private JButton nextButton;
 	private JLabel creditLabel;
 	private JLabel happinessLabel;
+	private JLabel scenarioLabel;
 
-	public Year(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, int[] modules) {
+	public Year(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		// construct components
-
+		
+		
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
 		JLabel text = new JLabel() {
 			Image img = icon.getImage();
@@ -43,12 +46,12 @@ class Year extends JPanel {
 		creditLabel = new JLabel("+ 100 Credits");
 		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		creditLabel.setBounds(460, 300, 1000, 100);
+		creditLabel.setBounds(265, 150, 1000, 100);
 
-		happinessLabel = new JLabel("+ 10 Hapiness");
+		happinessLabel = new JLabel("+ 10 Happiness");
 		happinessLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		happinessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		happinessLabel.setBounds(460, 400, 1000, 100);
+		happinessLabel.setBounds(265, 250, 1000, 100);
 
 		JScrollPane temp = new JScrollPane(text);
 		temp.setBounds(0, 0, 1920, 1080);
@@ -56,11 +59,11 @@ class Year extends JPanel {
 		titleLabel = new JLabel("Year " + currentYear);
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(560, 200, 800, 100);
+		titleLabel.setBounds(365, 50, 800, 100);
 
 		// construct components
 		nextButton = new JButton("Next");
-		nextButton.setBounds(585, 900, 750, 100);
+		nextButton.setBounds(390, 700, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));

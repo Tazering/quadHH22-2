@@ -18,7 +18,7 @@ class GameScreen extends JPanel {
 
 	private JButton jcomp1;
 	private JPanel contentPane;
-	private JLabel titleLabel, actionLabel, amountLabel, costLabel;
+	private JLabel titleLabel, actionLabel, amountLabel, costLabel, creditAmountLabel;
 	private JButton nextButton;
 	private int temps;
 	private int treeAmount = 0, moreVeggies = 0, cleanOcean = 0, saveEnergy = 0, recycle = 0, compost = 0, carpool = 0,
@@ -34,7 +34,7 @@ class GameScreen extends JPanel {
 			turbineCostLabel;
 
 	public GameScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			int[] modules) {
+			boolean[] modules) {
 		temps = credits;
 		contentPane = panel;
 		setLayout(null);
@@ -56,6 +56,15 @@ class GameScreen extends JPanel {
 		};
 		JScrollPane temp = new JScrollPane(text);
 		temp.setBounds(0, 0, 1920, 1080);
+		
+		
+		
+		creditAmountLabel = new JLabel("Credits: " + credits);
+		creditAmountLabel.setBounds(565, 10, 400, 50);
+		creditAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		creditAmountLabel.setForeground(Color.BLACK);
+		creditAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
+		add(creditAmountLabel);
 
 		titleLabel = new JLabel("This is the game screen");
 		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
@@ -122,42 +131,42 @@ class GameScreen extends JPanel {
 		saveEnergyAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(saveEnergyAmountLabel);
 
-		recycleAmountLabel = new JLabel(treeAmount + "/5");
+		recycleAmountLabel = new JLabel(treeAmount + "/3");
 		recycleAmountLabel.setBounds(1125, 5 * 50, 150, 50);
 		recycleAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		recycleAmountLabel.setForeground(Color.BLACK);
 		recycleAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(recycleAmountLabel);
 
-		compostAmountLabel = new JLabel(treeAmount + "/5");
+		compostAmountLabel = new JLabel(treeAmount + "/3");
 		compostAmountLabel.setBounds(1125, 6 * 50, 150, 50);
 		compostAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		compostAmountLabel.setForeground(Color.BLACK);
 		compostAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(compostAmountLabel);
 
-		carpoolAmountLabel = new JLabel(treeAmount + "/5");
+		carpoolAmountLabel = new JLabel(treeAmount + "/3");
 		carpoolAmountLabel.setBounds(1125, 7 * 50, 150, 50);
 		carpoolAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		carpoolAmountLabel.setForeground(Color.BLACK);
 		carpoolAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(carpoolAmountLabel);
 
-		solarPanelAmountLabel = new JLabel(treeAmount + "/5");
+		solarPanelAmountLabel = new JLabel(treeAmount + "/3");
 		solarPanelAmountLabel.setBounds(1125, 8 * 50, 150, 50);
 		solarPanelAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		solarPanelAmountLabel.setForeground(Color.BLACK);
 		solarPanelAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(solarPanelAmountLabel);
 
-		nationalParkAmountLabel = new JLabel(treeAmount + "/5");
+		nationalParkAmountLabel = new JLabel(treeAmount + "/3");
 		nationalParkAmountLabel.setBounds(1125, 9 * 50, 150, 50);
 		nationalParkAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nationalParkAmountLabel.setForeground(Color.BLACK);
 		nationalParkAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(nationalParkAmountLabel);
 
-		turbineAmountLabel = new JLabel(treeAmount + "/5");
+		turbineAmountLabel = new JLabel(treeAmount + "/3");
 		turbineAmountLabel.setBounds(1125, 10 * 50, 150, 50);
 		turbineAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		turbineAmountLabel.setForeground(Color.BLACK);
@@ -173,7 +182,10 @@ class GameScreen extends JPanel {
 			if (treeAmount < 5 && temps >= 20) {
 				treeAmount++;
 				temps -= 20;
+				treeAmountAmountLabel.setText(treeAmount + "/5");
+				creditAmountLabel.setText("Credits: " + temps);
 			}
+			
 		});
 		add(treeAmountButton);
 
@@ -183,9 +195,11 @@ class GameScreen extends JPanel {
 		moreVeggiesButton.setForeground(Color.WHITE);
 		moreVeggiesButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		moreVeggiesButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
+			if (moreVeggies < 5 && temps >= 5) {
+				moreVeggies++;
+				temps -= 5;
+				moreVeggiesAmountLabel.setText(moreVeggies + "/5");
+				creditAmountLabel.setText("Credits: " + temps);
 			}
 		});
 		add(moreVeggiesButton);
@@ -196,9 +210,11 @@ class GameScreen extends JPanel {
 		cleanOceanButton.setForeground(Color.WHITE);
 		cleanOceanButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		cleanOceanButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
+			if (cleanOcean < 5 && temps >= 10) {
+				cleanOcean++;
+				temps -= 10;
+				cleanOceanAmountLabel.setText(cleanOcean + "/5");
+				creditAmountLabel.setText("Credits: " + temps);
 			}
 		});
 		add(cleanOceanButton);
@@ -209,11 +225,13 @@ class GameScreen extends JPanel {
 		saveEnergyButton.setForeground(Color.WHITE);
 		saveEnergyButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		saveEnergyButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
-		});
+			if (saveEnergy < 3 && temps >= 25) {
+				saveEnergy++;
+				temps -= 25;
+				saveEnergyAmountLabel.setText(saveEnergy + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}});
 		add(saveEnergyButton);
 
 		recycleButton = new JButton("Recycle");
@@ -222,10 +240,13 @@ class GameScreen extends JPanel {
 		recycleButton.setForeground(Color.WHITE);
 		recycleButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		recycleButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (recycle < 3 && temps >= 5) {
+				recycle++;
+				temps -= 5;
+				recycleAmountLabel.setText(recycle + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(recycleButton);
 
@@ -235,10 +256,13 @@ class GameScreen extends JPanel {
 		compostButton.setForeground(Color.WHITE);
 		compostButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		compostButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (compost < 3 && temps >= 10) {
+				compost++;
+				temps -= 10;
+				compostAmountLabel.setText(compost + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(compostButton);
 
@@ -248,10 +272,13 @@ class GameScreen extends JPanel {
 		carpoolButton.setForeground(Color.WHITE);
 		carpoolButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		carpoolButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (carpool < 3 && temps >= 10) {
+				carpool++;
+				temps -= 10;
+				carpoolAmountLabel.setText(carpool + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(carpoolButton);
 
@@ -261,10 +288,13 @@ class GameScreen extends JPanel {
 		solarPanelButton.setForeground(Color.WHITE);
 		solarPanelButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		solarPanelButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (solarPanel < 3 && temps >= 50) {
+				solarPanel++;
+				temps -= 50;
+				solarPanelAmountLabel.setText(solarPanel + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(solarPanelButton);
 
@@ -274,10 +304,13 @@ class GameScreen extends JPanel {
 		nationalParkButton.setForeground(Color.WHITE);
 		nationalParkButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		nationalParkButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (nationalPark < 3 && temps >= 30) {
+				nationalPark++;
+				temps -= 30;
+				nationalParkAmountLabel.setText(nationalPark + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(nationalParkButton);
 
@@ -287,15 +320,18 @@ class GameScreen extends JPanel {
 		turbineButton.setForeground(Color.WHITE);
 		turbineButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		turbineButton.addActionListener((ActionEvent e) -> {
-			if (treeAmount < 5 && temps >= 20) {
-				treeAmount++;
-				temps -= 20;
-			}
+			if (turbine < 3 && temps >= 50) {
+				turbine++;
+				temps -= 50;
+				turbineAmountLabel.setText(turbine + "/3");
+				creditAmountLabel.setText("Credits: " + temps);
+		
+		}
 		});
 		add(turbineButton);
 
 		nextButton = new JButton("Next");
-		nextButton.setBounds(585, 550, 750, 50);
+		nextButton.setBounds(390, 700, 750, 100);
 		nextButton.setBackground(Color.BLUE);
 		nextButton.setForeground(Color.WHITE);
 		nextButton.setFont(new Font("Comic Sans", Font.BOLD, 30));

@@ -14,7 +14,7 @@ class WinScreen extends JPanel {
 	private JPanel contentPane;
 
 	public WinScreen(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
-			int[] modules) {
+			boolean[] modules) {
 		contentPane = panel;
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
