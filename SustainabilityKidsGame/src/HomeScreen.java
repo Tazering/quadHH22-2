@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 class HomeScreen extends JPanel {
 	private JButton nextButton;
 	private JButton demoButton;
+	private JButton resourceButton;
 	private JPanel contentPane;
 	private JLabel titleLabel;
 	private JLabel blackBox;
@@ -82,6 +83,21 @@ class HomeScreen extends JPanel {
 
 		});
 
+		resourceButton = new JButton("Additional Resources");
+		resourceButton.setBounds(390, 650, 750, 100);
+		resourceButton.setBackground(Color.BLUE);
+		resourceButton.setForeground(Color.WHITE);
+		resourceButton.setFont(new Font("Comic Sans", Font.BOLD, 30));
+
+		resourceButton.addActionListener((ActionEvent e) -> {
+
+			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+			Resource resource = new Resource(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
+			contentPane.add(resource);
+			cardLayout.next(contentPane);
+		});
+
+		add(resourceButton);
 		add(demoButton);
 		add(nextButton);
 		add(titleLabel);
