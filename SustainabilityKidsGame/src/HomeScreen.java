@@ -50,7 +50,7 @@ class HomeScreen extends JPanel {
 		titleLabel.setBounds(365, 50, 800, 100);
 
 		blackBox = new JLabel();
-		blackBox.setBackground(Color.GRAY);
+		blackBox.setBackground(new Color(227, 221, 168));
 		blackBox.setOpaque(true);
 		blackBox.setBounds(365, 150, 800, 800);
 

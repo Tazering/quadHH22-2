@@ -21,7 +21,7 @@ public class Main {
 					+ "only 30 credits.",
 			"You are given permission by the world’s countries\n" + "to create national parks. You can create up to 3\n"
 					+ "parks for 20 credits each!",
-			"Engineers have created a new invention: the Wind\n" + "Turbine. You can now build up to 4 wind turbines\n+"
+			"Engineers have created a new invention: the Wind\n" + "Turbine. You can now build up to 4 wind turbines\n"
 					+ "for 50 credits each!",
 			"Uh oh! A fire has broken out in the Northern Hemi-\n"
 					+ "sphere. Your Earth’s happiness has dropped by 25.",
@@ -30,7 +30,7 @@ public class Main {
 			"Tree workers have gone on strike! It now costs 40\n" + "credits to plant trees.",
 			"An oil tanker crashes in the ocean, causing millions\n"
 					+ "of gallons of oil to pollutethe Atlantic. Your\n" + "Earth’s happiness has dropped by 30.",
-			"It has been a rough time for the world’s economy,\n" + "and so you have been given only 50 credits to\n+"
+			"It has been a rough time for the world’s economy,\n" + "and so you have been given only 50 credits to\n"
 					+ "spend.",
 			"Oh no! A new coal mine has been built. Your Earth’s\n" + "happiness has dropped by 20.",
 			"Oh no! Less and less people have been carpooling\n" + "to school because of a flu outbreak. Your Earth’s\n"

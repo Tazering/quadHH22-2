@@ -50,7 +50,7 @@ class GameScreen extends JPanel {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
-		setBackground(Color.gray);
+		setBackground(new Color(227, 221, 168));
 		// construct components
 
 		if (happinessValue <= 20) {
