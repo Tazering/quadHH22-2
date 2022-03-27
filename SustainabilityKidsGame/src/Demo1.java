@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 class Demo1 extends JPanel {
 	private JPanel contentPane;
@@ -84,11 +83,6 @@ class Demo1 extends JPanel {
 		demoText4.setBounds(475, 550, 1000, 100);
 		add(demoText4);
 
-		titleLabel = new JLabel("This is Demo Page 1");
-		titleLabel.setFont(new Font("Comic Sans", Font.BOLD, 72));
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(365, 50, 800, 100);
-
 		// construct components
 		nextButton = new JButton("Next");
 		nextButton.setBounds(390, 700, 750, 100);
@@ -103,7 +97,6 @@ class Demo1 extends JPanel {
 			cardLayout.next(contentPane);
 		});
 
-		add(titleLabel);
 		add(nextButton);
 		add(temp);
 	}

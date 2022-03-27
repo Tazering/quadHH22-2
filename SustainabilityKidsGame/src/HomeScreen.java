@@ -64,7 +64,7 @@ class HomeScreen extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			Year year = new Year(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
+			Year year = new Year(contentPane, 1, 100, 10, scenarios, scenario);
 			contentPane.add(year);
 			cardLayout.next(contentPane);
 		});
