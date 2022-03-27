@@ -76,12 +76,21 @@ class Stats extends JPanel {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 
-			if (currentYear >= 300 || happinessValue >= 100) {
-				WinScreen winScreen = new WinScreen(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
+			if (currentYear >= 10 || happinessValue >= 100) {
+				WinScreen winScreen = new WinScreen(contentPane, currentYear, credits, happinessValue, scenarios,
+						scenario);
 				contentPane.add(winScreen);
 				cardLayout.next(contentPane);
+			} else if (happinessValue < 0) {
+				LoseScreen loseScreen = new LoseScreen(contentPane, currentYear, credits, happinessValue, scenarios,
+						scenario);
+				contentPane.add(loseScreen);
+				cardLayout.next(contentPane);
+
 			} else {
-				NewsUpdate newsUpdate = new NewsUpdate(contentPane, currentYear + 1, credits, happinessValue, scenarios, scenario);
+
+				NewsUpdate newsUpdate = new NewsUpdate(contentPane, currentYear + 1, credits, happinessValue, scenarios,
+						scenario);
 				contentPane.add(newsUpdate);
 				cardLayout.next(contentPane);
 			}

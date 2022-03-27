@@ -21,7 +21,8 @@ class HomeScreen extends JPanel {
 	private JLabel blackBox;
 	static Year year;
 
-	public HomeScreen(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios, int scenario) {
+	public HomeScreen(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios,
+			int scenario) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -87,9 +88,8 @@ class HomeScreen extends JPanel {
 		add(blackBox);
 		add(temp);
 	}
-	
-	public static Year getYearScreen()
-	{
+
+	public static Year getYearScreen() {
 		return year;
 	}
 }

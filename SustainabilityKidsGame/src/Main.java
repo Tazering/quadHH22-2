@@ -10,9 +10,9 @@ import javax.swing.SwingUtilities;
 public class Main {
 	public static int happinessValue = 10;
 	public static int credits = 0;
-	
+
 	public static Scenario[] scenarios = new Scenario[15];
-	private int scenario = -1;	
+	private int scenario = -1;
 	public static final String[] scenarioText = {
 			"The world’s countries have recognized your efforts, and have given you an extra 30 credits.",
 			"Woah! Scientists have discovered a new tree species that grows incredibly fast!\nYou can now plant twice as many trees.",
@@ -29,7 +29,7 @@ public class Main {
 			"Uh oh! There is a shortage of recycling bins, so you can no longer recycle.",
 			"Uh oh! There is a shortage of composting bins, so you can no longer compost.",
 			"Oh no! A new lumber company has cut down thousands of trees. Your Earth’s\nhappiness has dropped by 20!" };
-	
+
 	public static Function[] functions = new Function[10];
 	/*
 	 * Index: Module: 0 1 2 3 4 5 6 7 8 9
@@ -41,24 +41,22 @@ public class Main {
 	public static HomeScreen homeScreen;
 
 	private Dimension screenSize;
-	private void init()
-	{
+
+	private void init() {
 		initializeScenarios();
 		initializeFunctions();
 		displayGUI();
 	}
-	
-	private void initializeScenarios() 
-	{
-		for (int i = 0; i < scenarioText.length; i++)
-		{
+
+	private void initializeScenarios() {
+		for (int i = 0; i < scenarioText.length; i++) {
 			scenarios[i] = new Scenario(scenarioText[i], i);
 		}
 	}
-	
-	private void initializeFunctions()
-	{
-		//private enum FunctionTypes{TREE,VEGGIE,OCEAN,ENERGY,RECYCLE,COMPOST,CARPOOL,SOLAR,PARK,TURBINE};
+
+	private void initializeFunctions() {
+		// private enum
+		// FunctionTypes{TREE,VEGGIE,OCEAN,ENERGY,RECYCLE,COMPOST,CARPOOL,SOLAR,PARK,TURBINE};
 		functions[0] = new Function(FunctionTypes.TREE, "Plant Trees", 20, 6, 5, 0, true);
 		functions[1] = new Function(FunctionTypes.VEGGIES, "Eat More Veggies", 5, 1, 5, 0, true);
 		functions[2] = new Function(FunctionTypes.OCEAN, "Ocean Clean Up", 10, 1, 5, 0, true);
@@ -70,24 +68,19 @@ public class Main {
 		functions[8] = new Function(FunctionTypes.PARK, "National Parks", 20, 10, 0, 0, false);
 		functions[9] = new Function(FunctionTypes.TURBINE, "Wind Turbines", 50, 20, 0, 0, false);
 	}
-	
+
 	private void displayGUI() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 		JFrame frame = new JFrame("Sustainability Game");
 		frame.setSize(screenSize.width, screenSize.height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.setSize(screenSize.width, screenSize.height);
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new CardLayout());
 
 		homeScreen = new HomeScreen(contentPane, currentYear, credits, happinessValue, scenarios, scenario);
-		// loseScreen = new LoseScreen(contentPane, currentYear, credits,
-		// happinessValue, scenarios, modules);
-		// resourceScreen = new Resource(contentPane, currentYear, credits,
-		// happinessValue, scenarios, modules);
 
 		contentPane.add(homeScreen);
 
@@ -104,14 +97,12 @@ public class Main {
 			}
 		});
 	}
-	
-	public static void setHappiness(int newHappiness)
-	{
+
+	public static void setHappiness(int newHappiness) {
 		happinessValue = newHappiness;
 	}
-	
-	public static HomeScreen getHomeScreen()
-	{
+
+	public static HomeScreen getHomeScreen() {
 		return homeScreen;
 	}
 

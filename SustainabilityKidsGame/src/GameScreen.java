@@ -3,14 +3,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 class GameScreen extends JPanel {
@@ -22,10 +23,10 @@ class GameScreen extends JPanel {
 	private JButton nextButton;
 	private JLabel happinessBar, happinessBarBack, happinessBarScale1, happinessBarScale2, happinessTitle;
 	public static int tempCredits, tempHappiness;
-	
+
 	private JButton treeAmountButton, moreVeggiesButton, cleanOceanButton, saveEnergyButton, recycleButton,
 			compostButton, carpoolButton, solarPanelButton, nationalParkButton, turbineButton;
-	
+
 	private JLabel treeAmountLabel, moreVeggiesAmountLabel, cleanOceanAmountLabel, saveEnergyAmountLabel,
 			recycleAmountLabel, compostAmountLabel, carpoolAmountLabel, solarPanelAmountLabel, nationalParkAmountLabel,
 			turbineAmountLabel;
@@ -33,6 +34,14 @@ class GameScreen extends JPanel {
 	private JLabel treeAmountCostLabel, moreVeggiesCostLabel, cleanOceanCostLabel, saveEnergyCostLabel,
 			recycleCostLabel, compostCostLabel, carpoolCostLabel, solarPanelCostLabel, nationalParkCostLabel,
 			turbineCostLabel;
+
+	private BufferedImage image;
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(image, 150, 20, null);
+	}
 
 	public GameScreen(JPanel panel, int currentYear, int credits, int happinessValue, Scenario[] scenarios,
 			int scenario) {
@@ -44,25 +53,42 @@ class GameScreen extends JPanel {
 		setBackground(Color.gray);
 		// construct components
 
-		final ImageIcon icon = new ImageIcon("sweating.jpg");
-		JLabel text = new JLabel() {
-			Image img = icon.getImage();
-			{
-				setOpaque(false);
+		if (happinessValue <= 20) {
+			try {
+				image = ImageIO.read(new File("furious.png"));
+			} catch (IOException e) {
+				System.out.println("Error");
 			}
-
-			public void paintComponent(Graphics graphics) {
-				graphics.drawImage(img, 0, 0, this);
-				super.paintComponent(graphics);
+		} else if (happinessValue > 20 && happinessValue <= 40) {
+			try {
+				image = ImageIO.read(new File("angry.png"));
+			} catch (IOException e) {
+				System.out.println("Error");
 			}
-		};
-		text.setBounds(200, 200, 400, 400);
-		JScrollPane temp = new JScrollPane(text);
-		temp.setBounds(350, 175, 400, 400);
+		} else if (happinessValue > 40 && happinessValue <= 60) {
+			try {
+				image = ImageIO.read(new File("sweating.png"));
+			} catch (IOException e) {
+				System.out.println("Error");
+			}
+		} else if (happinessValue > 60 && happinessValue <= 80) {
+			try {
+				image = ImageIO.read(new File("cool.png"));
+			} catch (IOException e) {
+				System.out.println("Error");
+			}
+		} else {
+			try {
+				image = ImageIO.read(new File("happy.png"));
+			} catch (IOException e) {
+				System.out.println("Error");
+			}
+		}
 
 		happinessTitle = new JLabel("Happy-Meter");
 		happinessTitle.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		happinessTitle.setBounds(20, 0, 350, 100);
+
 		add(happinessTitle);
 
 		happinessBarBack = new JLabel("");
@@ -122,81 +148,101 @@ class GameScreen extends JPanel {
 		costLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(costLabel);
 
-		createCostLabel(treeAmountCostLabel, 1, Integer.toString(Main.functions[FunctionTypes.TREE.ordinal()].getCost()));
-		createCostLabel(moreVeggiesCostLabel, 2, Integer.toString(Main.functions[FunctionTypes.VEGGIES.ordinal()].getCost()));
-		createCostLabel(cleanOceanCostLabel, 3, Integer.toString(Main.functions[FunctionTypes.OCEAN.ordinal()].getCost()));
-		createCostLabel(saveEnergyCostLabel, 4, Integer.toString(Main.functions[FunctionTypes.ENERGY.ordinal()].getCost()));
-		createCostLabel(recycleCostLabel, 5, Integer.toString(Main.functions[FunctionTypes.RECYCLE.ordinal()].getCost()));
-		createCostLabel(compostCostLabel, 6, Integer.toString(Main.functions[FunctionTypes.COMPOST.ordinal()].getCost()));
-		createCostLabel(carpoolCostLabel, 7, Integer.toString(Main.functions[FunctionTypes.CARPOOL.ordinal()].getCost()));
-		createCostLabel(solarPanelCostLabel, 8, Integer.toString(Main.functions[FunctionTypes.SOLAR.ordinal()].getCost()));
-		createCostLabel(nationalParkCostLabel, 9, Integer.toString(Main.functions[FunctionTypes.PARK.ordinal()].getCost()));
-		createCostLabel(turbineCostLabel, 10, Integer.toString(Main.functions[FunctionTypes.TURBINE.ordinal()].getCost()));
+		createCostLabel(treeAmountCostLabel, 1,
+				Integer.toString(Main.functions[FunctionTypes.TREE.ordinal()].getCost()));
+		createCostLabel(moreVeggiesCostLabel, 2,
+				Integer.toString(Main.functions[FunctionTypes.VEGGIES.ordinal()].getCost()));
+		createCostLabel(cleanOceanCostLabel, 3,
+				Integer.toString(Main.functions[FunctionTypes.OCEAN.ordinal()].getCost()));
+		createCostLabel(saveEnergyCostLabel, 4,
+				Integer.toString(Main.functions[FunctionTypes.ENERGY.ordinal()].getCost()));
+		createCostLabel(recycleCostLabel, 5,
+				Integer.toString(Main.functions[FunctionTypes.RECYCLE.ordinal()].getCost()));
+		createCostLabel(compostCostLabel, 6,
+				Integer.toString(Main.functions[FunctionTypes.COMPOST.ordinal()].getCost()));
+		createCostLabel(carpoolCostLabel, 7,
+				Integer.toString(Main.functions[FunctionTypes.CARPOOL.ordinal()].getCost()));
+		createCostLabel(solarPanelCostLabel, 8,
+				Integer.toString(Main.functions[FunctionTypes.SOLAR.ordinal()].getCost()));
+		createCostLabel(nationalParkCostLabel, 9,
+				Integer.toString(Main.functions[FunctionTypes.PARK.ordinal()].getCost()));
+		createCostLabel(turbineCostLabel, 10,
+				Integer.toString(Main.functions[FunctionTypes.TURBINE.ordinal()].getCost()));
 
-		treeAmountLabel = new JLabel(Main.functions[FunctionTypes.TREE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount());
+		treeAmountLabel = new JLabel(Main.functions[FunctionTypes.TREE.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount());
 		treeAmountLabel.setBounds(1125, 1 * 50, 150, 50);
 		treeAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		treeAmountLabel.setForeground(Color.BLACK);
 		treeAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(treeAmountLabel);
 
-		moreVeggiesAmountLabel = new JLabel(Main.functions[FunctionTypes.VEGGIES.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount());
+		moreVeggiesAmountLabel = new JLabel(Main.functions[FunctionTypes.VEGGIES.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount());
 		moreVeggiesAmountLabel.setBounds(1125, 2 * 50, 150, 50);
 		moreVeggiesAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		moreVeggiesAmountLabel.setForeground(Color.BLACK);
 		moreVeggiesAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(moreVeggiesAmountLabel);
 
-		cleanOceanAmountLabel = new JLabel(Main.functions[FunctionTypes.OCEAN.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount());
+		cleanOceanAmountLabel = new JLabel(Main.functions[FunctionTypes.OCEAN.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount());
 		cleanOceanAmountLabel.setBounds(1125, 3 * 50, 150, 50);
 		cleanOceanAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cleanOceanAmountLabel.setForeground(Color.BLACK);
 		cleanOceanAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(cleanOceanAmountLabel);
 
-		saveEnergyAmountLabel = new JLabel(Main.functions[FunctionTypes.ENERGY.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount());
+		saveEnergyAmountLabel = new JLabel(Main.functions[FunctionTypes.ENERGY.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount());
 		saveEnergyAmountLabel.setBounds(1125, 4 * 50, 150, 50);
 		saveEnergyAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		saveEnergyAmountLabel.setForeground(Color.BLACK);
 		saveEnergyAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(saveEnergyAmountLabel);
 
-		recycleAmountLabel = new JLabel(Main.functions[FunctionTypes.RECYCLE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount());
+		recycleAmountLabel = new JLabel(Main.functions[FunctionTypes.RECYCLE.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount());
 		recycleAmountLabel.setBounds(1125, 5 * 50, 150, 50);
 		recycleAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		recycleAmountLabel.setForeground(Color.BLACK);
 		recycleAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(recycleAmountLabel);
 
-		compostAmountLabel = new JLabel(Main.functions[FunctionTypes.COMPOST.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount());
+		compostAmountLabel = new JLabel(Main.functions[FunctionTypes.COMPOST.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount());
 		compostAmountLabel.setBounds(1125, 6 * 50, 150, 50);
 		compostAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		compostAmountLabel.setForeground(Color.BLACK);
 		compostAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(compostAmountLabel);
 
-		carpoolAmountLabel = new JLabel(Main.functions[FunctionTypes.CARPOOL.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount());
+		carpoolAmountLabel = new JLabel(Main.functions[FunctionTypes.CARPOOL.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount());
 		carpoolAmountLabel.setBounds(1125, 7 * 50, 150, 50);
 		carpoolAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		carpoolAmountLabel.setForeground(Color.BLACK);
 		carpoolAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(carpoolAmountLabel);
 
-		solarPanelAmountLabel = new JLabel(Main.functions[FunctionTypes.SOLAR.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount());
+		solarPanelAmountLabel = new JLabel(Main.functions[FunctionTypes.SOLAR.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount());
 		solarPanelAmountLabel.setBounds(1125, 8 * 50, 150, 50);
 		solarPanelAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		solarPanelAmountLabel.setForeground(Color.BLACK);
 		solarPanelAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(solarPanelAmountLabel);
 
-		nationalParkAmountLabel = new JLabel(Main.functions[FunctionTypes.PARK.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount());
+		nationalParkAmountLabel = new JLabel(Main.functions[FunctionTypes.PARK.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount());
 		nationalParkAmountLabel.setBounds(1125, 9 * 50, 150, 50);
 		nationalParkAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nationalParkAmountLabel.setForeground(Color.BLACK);
 		nationalParkAmountLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
 		add(nationalParkAmountLabel);
 
-		turbineAmountLabel = new JLabel(Main.functions[FunctionTypes.TURBINE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount());
+		turbineAmountLabel = new JLabel(Main.functions[FunctionTypes.TURBINE.ordinal()].getUsedAmount() + "/"
+				+ Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount());
 		turbineAmountLabel.setBounds(1125, 10 * 50, 150, 50);
 		turbineAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		turbineAmountLabel.setForeground(Color.BLACK);
@@ -209,9 +255,12 @@ class GameScreen extends JPanel {
 		treeAmountButton.setForeground(Color.WHITE);
 		treeAmountButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		treeAmountButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.TREE.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.TREE.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.TREE.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.TREE.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.TREE.ordinal()].affectEarth();
-				treeAmountLabel.setText(Main.functions[FunctionTypes.TREE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount());
+				treeAmountLabel.setText(Main.functions[FunctionTypes.TREE.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.TREE.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -223,9 +272,12 @@ class GameScreen extends JPanel {
 		moreVeggiesButton.setForeground(Color.WHITE);
 		moreVeggiesButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		moreVeggiesButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.VEGGIES.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.VEGGIES.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.VEGGIES.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.VEGGIES.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.VEGGIES.ordinal()].affectEarth();
-				moreVeggiesAmountLabel.setText(Main.functions[FunctionTypes.VEGGIES.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount());
+				moreVeggiesAmountLabel.setText(Main.functions[FunctionTypes.VEGGIES.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.VEGGIES.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -237,9 +289,12 @@ class GameScreen extends JPanel {
 		cleanOceanButton.setForeground(Color.WHITE);
 		cleanOceanButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		cleanOceanButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.OCEAN.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.OCEAN.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.OCEAN.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.OCEAN.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.OCEAN.ordinal()].affectEarth();
-				cleanOceanAmountLabel.setText(Main.functions[FunctionTypes.OCEAN.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount());
+				cleanOceanAmountLabel.setText(Main.functions[FunctionTypes.OCEAN.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.OCEAN.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -251,9 +306,12 @@ class GameScreen extends JPanel {
 		saveEnergyButton.setForeground(Color.WHITE);
 		saveEnergyButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		saveEnergyButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.ENERGY.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.ENERGY.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.ENERGY.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.ENERGY.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.ENERGY.ordinal()].affectEarth();
-				saveEnergyAmountLabel.setText(Main.functions[FunctionTypes.ENERGY.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount());
+				saveEnergyAmountLabel.setText(Main.functions[FunctionTypes.ENERGY.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.ENERGY.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -266,9 +324,12 @@ class GameScreen extends JPanel {
 		recycleButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		recycleButton.addActionListener((ActionEvent e) -> {
 			if (Main.functions[FunctionTypes.RECYCLE.ordinal()].isEnabled()) {
-				if (Main.functions[FunctionTypes.RECYCLE.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.RECYCLE.ordinal()].getCost()) {
+				if (Main.functions[FunctionTypes.RECYCLE.ordinal()]
+						.getUsedAmount() < Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount()
+						&& tempCredits >= Main.functions[FunctionTypes.RECYCLE.ordinal()].getCost()) {
 					Main.functions[FunctionTypes.RECYCLE.ordinal()].affectEarth();
-					recycleAmountLabel.setText(Main.functions[FunctionTypes.RECYCLE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount());
+					recycleAmountLabel.setText(Main.functions[FunctionTypes.RECYCLE.ordinal()].getUsedAmount() + "/"
+							+ Main.functions[FunctionTypes.RECYCLE.ordinal()].getMaxAmount());
 					creditAmountLabel.setText("Credits: " + tempCredits);
 				}
 			}
@@ -282,9 +343,12 @@ class GameScreen extends JPanel {
 		compostButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		compostButton.addActionListener((ActionEvent e) -> {
 			if (Main.functions[FunctionTypes.COMPOST.ordinal()].isEnabled()) {
-				if (Main.functions[FunctionTypes.COMPOST.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.COMPOST.ordinal()].getCost()) {
+				if (Main.functions[FunctionTypes.COMPOST.ordinal()]
+						.getUsedAmount() < Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount()
+						&& tempCredits >= Main.functions[FunctionTypes.COMPOST.ordinal()].getCost()) {
 					Main.functions[FunctionTypes.COMPOST.ordinal()].affectEarth();
-					compostAmountLabel.setText(Main.functions[FunctionTypes.COMPOST.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount());
+					compostAmountLabel.setText(Main.functions[FunctionTypes.COMPOST.ordinal()].getUsedAmount() + "/"
+							+ Main.functions[FunctionTypes.COMPOST.ordinal()].getMaxAmount());
 					creditAmountLabel.setText("Credits: " + tempCredits);
 				}
 			}
@@ -297,9 +361,12 @@ class GameScreen extends JPanel {
 		carpoolButton.setForeground(Color.WHITE);
 		carpoolButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		carpoolButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.CARPOOL.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.CARPOOL.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.CARPOOL.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.CARPOOL.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.CARPOOL.ordinal()].affectEarth();
-				carpoolAmountLabel.setText(Main.functions[FunctionTypes.CARPOOL.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount());
+				carpoolAmountLabel.setText(Main.functions[FunctionTypes.CARPOOL.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.CARPOOL.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -311,9 +378,12 @@ class GameScreen extends JPanel {
 		solarPanelButton.setForeground(Color.WHITE);
 		solarPanelButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		solarPanelButton.addActionListener((ActionEvent e) -> {
-			if (Main.functions[FunctionTypes.SOLAR.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.SOLAR.ordinal()].getCost()) {
+			if (Main.functions[FunctionTypes.SOLAR.ordinal()]
+					.getUsedAmount() < Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount()
+					&& tempCredits >= Main.functions[FunctionTypes.SOLAR.ordinal()].getCost()) {
 				Main.functions[FunctionTypes.SOLAR.ordinal()].affectEarth();
-				solarPanelAmountLabel.setText(Main.functions[FunctionTypes.SOLAR.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount());
+				solarPanelAmountLabel.setText(Main.functions[FunctionTypes.SOLAR.ordinal()].getUsedAmount() + "/"
+						+ Main.functions[FunctionTypes.SOLAR.ordinal()].getMaxAmount());
 				creditAmountLabel.setText("Credits: " + tempCredits);
 			}
 		});
@@ -326,9 +396,12 @@ class GameScreen extends JPanel {
 		nationalParkButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		nationalParkButton.addActionListener((ActionEvent e) -> {
 			if (Main.functions[FunctionTypes.PARK.ordinal()].isEnabled()) {
-				if (Main.functions[FunctionTypes.PARK.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.PARK.ordinal()].getCost()) {
+				if (Main.functions[FunctionTypes.PARK.ordinal()]
+						.getUsedAmount() < Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount()
+						&& tempCredits >= Main.functions[FunctionTypes.PARK.ordinal()].getCost()) {
 					Main.functions[FunctionTypes.PARK.ordinal()].affectEarth();
-					nationalParkAmountLabel.setText(Main.functions[FunctionTypes.PARK.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount());
+					nationalParkAmountLabel.setText(Main.functions[FunctionTypes.PARK.ordinal()].getUsedAmount() + "/"
+							+ Main.functions[FunctionTypes.PARK.ordinal()].getMaxAmount());
 					creditAmountLabel.setText("Credits: " + tempCredits);
 				}
 			}
@@ -342,9 +415,12 @@ class GameScreen extends JPanel {
 		turbineButton.setFont(new Font("Comic Sans", Font.BOLD, 13));
 		turbineButton.addActionListener((ActionEvent e) -> {
 			if (Main.functions[FunctionTypes.TURBINE.ordinal()].isEnabled()) {
-				if (Main.functions[FunctionTypes.TURBINE.ordinal()].getUsedAmount() < Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount() && tempCredits >= Main.functions[FunctionTypes.TURBINE.ordinal()].getCost()) {
+				if (Main.functions[FunctionTypes.TURBINE.ordinal()]
+						.getUsedAmount() < Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount()
+						&& tempCredits >= Main.functions[FunctionTypes.TURBINE.ordinal()].getCost()) {
 					Main.functions[FunctionTypes.TURBINE.ordinal()].affectEarth();
-					turbineAmountLabel.setText(Main.functions[FunctionTypes.TURBINE.ordinal()].getUsedAmount() + "/" + Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount());
+					turbineAmountLabel.setText(Main.functions[FunctionTypes.TURBINE.ordinal()].getUsedAmount() + "/"
+							+ Main.functions[FunctionTypes.TURBINE.ordinal()].getMaxAmount());
 					creditAmountLabel.setText("Credits: " + tempCredits);
 				}
 			}
@@ -362,16 +438,15 @@ class GameScreen extends JPanel {
 			Stats yearlyStats = new Stats(contentPane, currentYear, tempCredits, tempHappiness, scenarios, scenario);
 			contentPane.add(yearlyStats);
 			cardLayout.next(contentPane);
-			for(Function function : Main.functions)
-			{
+			for (Function function : Main.functions) {
 				function.setUsedAmount(0);
 			}
-			
+
 		});
 
 		add(nextButton);
 		// add(treeAmountButton);
-		add(temp);
+		// add(temp);
 	}
 
 	public void createCostLabel(JLabel label, int pos, String cost) {
