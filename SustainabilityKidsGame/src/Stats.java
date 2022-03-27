@@ -25,7 +25,8 @@ class Stats extends JPanel {
 	private JLabel blackBox;
 	private int currentYear;
 
-	public Stats(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
+	public Stats(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios,
+			boolean[] modules) {
 		contentPane = panel;
 		setLayout(null);
 		setOpaque(true);
@@ -76,7 +77,7 @@ class Stats extends JPanel {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 
-			if (currentYear >= 3) {
+			if (currentYear >= 300) {
 				WinScreen winScreen = new WinScreen(contentPane, currentYear, credits, happinessValue, scenarios,
 						modules);
 				contentPane.add(winScreen);

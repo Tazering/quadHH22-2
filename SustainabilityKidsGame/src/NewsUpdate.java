@@ -34,21 +34,24 @@ class NewsUpdate extends JPanel {
 		setBackground(Color.GREEN.darker().darker());
 		// construct components
 
+		for (int x = 0; x < modules.length; x++)
+			modules[x] = false;
+
 		Random rand = new Random();
-		
-		if(currentYear > 1) {
-		int randScenario = rand.nextInt(0, 15);
-		
-		scenarioLabel = new JTextArea(scenarios[randScenario]);
-		scenarioLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
-		scenarioLabel.setOpaque(false);
-		scenarioLabel.setEditable(false);
-		//scenarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		scenarioLabel.setBounds(265, 400, 1000, 100);
-		add(scenarioLabel);
-		modules[randScenario] = true;
+
+		if (currentYear > 1) {
+			int randScenario = rand.nextInt(0, 15);
+
+			scenarioLabel = new JTextArea(scenarios[randScenario]);
+			scenarioLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
+			scenarioLabel.setOpaque(false);
+			scenarioLabel.setEditable(false);
+			// scenarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			scenarioLabel.setBounds(265, 400, 1000, 100);
+			add(scenarioLabel);
+			modules[randScenario] = true;
 		}
-		
+
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
 		JLabel text = new JLabel() {
 			Image img = icon.getImage();

@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,13 +23,15 @@ class Year extends JPanel {
 	private JLabel creditLabel;
 	private JLabel happinessLabel;
 	private JLabel scenarioLabel;
+	private int tempCredits, tempHappiness;
 
 	public Year(JPanel panel, int currentYear, int credits, int happinessValue, String[] scenarios, boolean[] modules) {
+		tempCredits = credits + 100;
+		tempHappiness = happinessValue;
 		contentPane = panel;
 		setLayout(null);
 		// construct components
-		
-		
+
 		final ImageIcon icon = new ImageIcon("sizedClouds.jpg");
 		JLabel text = new JLabel() {
 			Image img = icon.getImage();
@@ -43,12 +44,51 @@ class Year extends JPanel {
 				super.paintComponent(graphics);
 			}
 		};
+		happinessLabel = new JLabel("+ 0 Happiness");
 		creditLabel = new JLabel("+ 100 Credits");
+
+		if (modules[5]) {
+			tempHappiness -= 25;
+			happinessLabel = new JLabel("-25 Happiness");
+		}
+
+		if (modules[10]) {
+			tempHappiness -= 20;
+			happinessLabel = new JLabel("-20 Happiness");
+		}
+		if (modules[14]) {
+			tempHappiness -= 20;
+			happinessLabel = new JLabel("-20 Happiness");
+		}
+		if (modules[11]) {
+			tempHappiness -= 20;
+			happinessLabel = new JLabel("-20 Happiness");
+		}
+
+		if (modules[6]) {
+			tempHappiness -= 25;
+			happinessLabel = new JLabel("-25 Happiness");
+		}
+
+		if (modules[8]) {
+			tempHappiness -= 30;
+			happinessLabel = new JLabel("-30 Happiness");
+		}
+
+		if (modules[9]) {
+			creditLabel = new JLabel("+ 50 Credits");
+			tempCredits -= 50;
+		}
+
+		if (modules[0]) {
+			creditLabel = new JLabel("+ 130 Credits");
+			tempCredits += 30;
+		}
+
 		creditLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		creditLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		creditLabel.setBounds(265, 150, 1000, 100);
 
-		happinessLabel = new JLabel("+ 10 Happiness");
 		happinessLabel.setFont(new Font("Comic Sans", Font.BOLD, 54));
 		happinessLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		happinessLabel.setBounds(265, 250, 1000, 100);
@@ -70,7 +110,7 @@ class Year extends JPanel {
 		nextButton.addActionListener((ActionEvent e) -> {
 
 			CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-			GameScreen gameScreen = new GameScreen(contentPane, currentYear, credits, happinessValue, scenarios,
+			GameScreen gameScreen = new GameScreen(contentPane, currentYear, tempCredits, tempHappiness, scenarios,
 					modules);
 			contentPane.add(gameScreen);
 			cardLayout.next(contentPane);
